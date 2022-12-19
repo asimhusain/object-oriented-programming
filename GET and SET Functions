@@ -1,0 +1,196 @@
+Create a class Rectangle. The class has attributes length and width, each of which defaults to 1.
+Provide methods that calculate the perimeter and the area of the rectangle. Provide set and get methods
+for both length and width. The set methods should verify that length and width are each floating-point numbers
+greater than or equal to 0.0 and less than 20.0. Write a program to test class Rectangle.
+#include<iostream>
+using namespace std;
+
+
+class Rectangle
+{
+private:
+	float length = 1;
+	float width = 1;
+public:
+	//getting the value of length
+	void setlength(float l)
+	{
+		if ((l >= 0.0) && (l <= 20.0))
+			length = l;
+		else
+		{
+			length = length;
+			cout << "Invalid Length " <<endl;
+		}
+		
+	}
+	float getlength()
+	{
+		return length;
+	}
+	//getting the value of width
+	void setwidth(float w)
+	{
+		if ((w >= 0.0) && (w <= 20.0))
+			width = w;
+		else
+		{
+			width = width;
+			cout << "Invalid Width "<<endl;
+		}
+	}
+	float getwidth()
+	{
+		return width;
+	}
+	//calculating perimeter
+	float perimeter()
+	{
+		float perimeter;
+		perimeter = 2 * (length + width);
+		return perimeter;
+	}
+	//calculating Area
+	float area()
+	{
+		float area;
+		area = length*width;
+		return area;
+	}
+
+};
+int main()
+{
+	float length,width;
+	Rectangle r1;
+	cout << "BY default length of rectanle is "  << r1.getlength() <<endl;
+	cout << "BY default width of rectanle is " << r1.getwidth() << endl;
+	cout << "Area of Rectangle is " << r1.area() << endl;
+	cout << "Perimeter of Rectangle is " << r1.perimeter() << endl;
+	cout << "========================================" << endl;
+	cout << "Enter new value of length" << endl;
+	cin >> length;
+	r1.setlength(length);
+	cout<< "Enter new value of length" << endl;
+	cin >> width;
+	r1.setwidth(width);
+	cout << "Area of Rectangle is " << r1.area() << endl;
+	cout << "Perimeter of Rectangle is " << r1.perimeter() << endl;
+	system("pause");
+	return 0;
+}
+
+
+Task 2
+Create a class called Employee that includes three pieces of information as instance variables—a first name,
+a last name, and a monthly salary. Provide a set and a get method for each instance variable. If the monthly 
+salary is not positive, set it to 0.0.Write a test application named EmployeeTest that demonstrates class Employee’s
+capabilities. Create two Employee objects and display the yearly salary for each Employee. Then give each Employee a
+10% raise and display each Employee’s yearly salary again.
+
+
+
+#include<iostream>
+#include<string>
+using namespace std;
+class Employee{
+private:
+	string firstname;
+	string lastname;
+	float salary = 0.0;
+public:
+	void setsalary(float x){
+		if (x >= 0.0){
+			salary = x;
+		}
+		else{
+			salary = salary;
+			cout << "Enter Correct salary\n";
+		}
+	}
+	float getsalary(){
+		return salary;
+	}
+	void setfirstname(string x){
+		firstname = x;
+	}
+	string getfirstname(){
+		return firstname;
+	}
+	void setlastname(string x){
+		lastname = x;
+	}
+	string getlastname(){
+		return lastname;
+	}
+
+};
+int main(){
+	float x, o;
+	string y, z;
+	Employee e1;
+	cout << "Employee 1" << endl;
+	cout << " First name = ";
+	cin >> y;
+	e1.setfirstname(y);
+	cout << " Last name = ";
+	cin >> z;
+	e1.setlastname(z);
+	cout << "Monthly salary = ";
+	cin >> x;
+	e1.setsalary(x);
+	
+	
+	cout << "\n";
+	cout << "The name of the employee is " << e1.getfirstname() << " " << e1.getlastname() << endl;
+	cout << "Whose monthly salary is " << e1.getsalary() << endl;
+	cout << "yearly salary " << 12 * (e1.getsalary()) << endl;
+	cout << "Raised salary is " << 12 * (e1.getsalary() + 0.1*e1.getsalary()) << endl;
+	
+	cout << "\n";
+
+	if (x < 0){
+		{
+			cout << "Incorrect salary" << endl;
+		}
+		
+	}
+	cout << "\n";
+	Employee e2;
+	cout << "Employee 2" << endl;
+	cout << " First name = ";
+	cin >> y;
+	e2.setfirstname(y);
+	cout << " Last name = ";
+	cin >> z;
+	e2.setlastname(z);
+	cout << "Monthly salary = ";
+	cin >> o;
+	e2.setsalary(o);
+	for (int i = 0; i < +40; i++){
+		cout << "-";
+	}
+	cout << "\n";
+	cout << "The name of the employee is " << e2.getfirstname() << " " << e2.getlastname() << endl;
+	cout << " monthly salary is " << e2.getsalary() << endl;
+	cout << "yearly salary " << 12 * (e2.getsalary()) << endl;
+	cout << "Raised sallary" << 12 * (e2.getsalary() + 0.1*e2.getsalary()) << endl;
+	
+	cout << "\n";
+
+	if (o <0){
+		cout << "Incorrect salary" << endl;
+	}
+	
+	cout << "\n";
+	system("pause");
+	return 0;
+}
+
+
+
+
+
+
+
+
