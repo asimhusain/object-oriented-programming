@@ -1,0 +1,430 @@
+Lab Task 1:
+Predict the output of following programs. If there are compilation errors, then fix them.
+Question 1a
+#include<iostream>
+using namespace std;
+class Test
+{
+private:
+  int x;
+public:
+  Test(int x = 0) { this->x = x; }
+  void change(Test *t) { this = t; }
+  void print() { cout << "x = " << x << endl; }
+};
+ 
+int main()
+{
+  Test obj(5);
+  Test *ptr = new Test (10);
+  obj.change(ptr);
+  obj.print();
+  return 0;
+}
+Correction
+#include<iostream>
+using namespace std;
+class Test
+{
+private:
+	int x;
+public:
+	Test(int x = 0) { this->x = x; }
+	void change(Test *t) { *this = *t; }
+	void print() { cout << "x = " << x << endl; }
+};
+
+int main()
+{
+	Test obj(5);
+	Test *ptr = new Test(10);
+	obj.change(ptr);
+	obj.print();
+	system("pause");
+	return 0;
+}
+ 
+
+Question 1b
+#include<iostream>
+using namespace std;
+ 
+class Test
+{
+private:
+  int x;
+  int y;
+public:
+  Test(int x = 0, int y = 0) { this->x = x; this->y = y; }
+  static void fun1() { cout << "Inside fun1()"; }
+  static void fun2() { cout << "Inside fun2()"; this->fun1(); }
+};
+ 
+int main()
+{
+  Test obj;
+  obj.fun2();
+  return 0;
+}
+correction
+
+#include<iostream>
+using namespace std;
+
+class Test
+{
+private:
+	int x;
+	int y;
+public:
+	Test(int x = 0, int y = 0) { this->x = x; this->y = y; }
+	 void fun1() { cout << "Inside fun1()"; }
+	 void fun2() { cout << "Inside fun2()"; this->fun1(); }
+};
+
+int main()
+{
+	Test obj;
+	obj.fun2();
+	system("pause");
+	return 0;
+}
+
+
+ 
+
+Question 1c
+#include<iostream>
+using namespace std;
+ 
+class Test
+{
+private:
+  int x;
+  int y;
+public:
+  Test (int x = 0, int y = 0) { this->x = x; this->y = y; }
+  Test setX(int a) { x = a; return *this; }
+  Test setY(int b) { y = b; return *this; }
+  void print() { cout << "x = " << x << " y = " << y << endl; }
+};
+ 
+int main()
+{
+  Test obj1;
+  obj1.setX(10).setY(20);
+  obj1.print();
+  return 0;
+}
+correction
+#include<iostream>
+using namespace std;
+
+class Test
+{
+private:
+	int x;
+	int y;
+public:
+	Test(int x = 0, int y = 0) { this->x = x; this->y = y; }
+	Test setX(int a) { x = a; return *this; }
+	Test setY(int b) { y = b; return *this; }
+	void print() { cout << "x = " << x << " y = " << y << endl; }
+};
+
+int main()
+{
+	Test obj1;
+	obj1=obj1.setX(10).setY(20);
+	obj1.print(); 
+	system("pause");
+	return 0;
+}
+
+ 
+
+Lab Task 2: Friends functions and Classes
+1) In geometry, a point is a position in space. We can define a point in 3d-space as the set of coordinates x, y, and z. For example, the Point(2.0, 1.0, 0.0) would be the point at coordinate space x=2.0, y=1.0, and z=0.0.
+In physics, a vector is a quantity that has a magnitude (length) and a direction (but no position). We can define a vector in 3d-space as an x, y, and z value representing the direction of the vector along the x, y, and z axis (the length can be derived from these). For example, the Vector(2.0, 0.0, 0.0) would be a vector representing a direction along the positive x-axis (only), with length 2.0.
+A Vector can be applied to a Point to move the Point to a new position. This is done by adding the vector’s direction to the point’s position to yield a new position. For example, Point(2.0, 1.0, 0.0) + Vector(2.0, 0.0, 0.0) would yield the point (4.0, 1.0, 0.0).
+Points and Vectors are often used in computer graphics (the point to represent vertices of shape, and vectors represent movement of the shape).
+Given the following program:
+
+#include <iostream> 
+class Vector3d
+{
+private:
+	double m_x, m_y, m_z;
+public:
+	Vector3d(double x = 0.0, double y = 0.0, double z = 0.0)
+		: m_x(x), m_y(y), m_z(z)
+	{
+ 
+	}
+ 	void print()
+	{
+		std::cout << "Vector(" << m_x << " , " << m_y << " , " << m_z << ")\n";
+	}
+};
+ class Point3d
+{
+private:
+	double m_x, m_y, m_z;
+ public:
+	Point3d(double x = 0.0, double y = 0.0, double z = 0.0)
+		: m_x(x), m_y(y), m_z(z)
+	{
+ 
+	}
+ 	void print()
+	{
+		std::cout << "Point(" << m_x << " , " << m_y << " , " << m_z << ")\n";
+	}
+ 	void moveByVector(Vector3d v)
+	{
+		// implement this function as a friend of class Vector3d
+	}
+};
+ 
+int main()
+{
+	Point3d p(1.0, 2.0, 3.0);
+	Vector3d v(2.0, 2.0, -3.0);
+ 
+	p.print();
+	p.moveByVector(v);
+	p.print();
+ 
+	return 0;
+}
+1a) Make Point3d a friend class of Vector3d, and implement function Point3d::moveByVector()
+CODE
+#include <iostream>
+using namespace std;
+class Vector3d
+{
+private:
+	double m_x, m_y, m_z;
+public:
+	Vector3d(double x = 0.0, double y = 0.0, double z = 0.0)
+		
+	{
+		m_x = x;
+		m_y = y;
+		m_z = z;
+	}
+
+	void print()
+	{
+		cout << "Vector(" << m_x << " , " << m_y << " , " << m_z << ")\n";
+	}
+
+	friend class Point3d; 
+};
+
+
+class Point3d
+{
+private:
+	double m_x, m_y, m_z;
+
+public:
+	Point3d(double x = 0.0, double y = 0.0, double z = 0.0)
+	{
+		m_x = x;
+		m_y = y;
+		m_z = z;
+    }
+
+	void print()
+	{
+		cout << "Point(" << m_x << " , " << m_y << " , " << m_z << ")\n";
+	}
+    void moveByVector(const Vector3d &v)
+	{
+		m_x += v.m_x;
+		m_y += v.m_y;
+		m_z += v.m_z;
+	}
+};
+
+int main()
+{
+	Point3d p(1.0, 2.0, 3.0);
+	Vector3d v(2.0, 2.0, -3.0);
+    p.print();
+	p.moveByVector(v);
+	p.print();
+       v.print();
+       cout<<"Function is called"<<endl;
+	system("pause");
+	return 0;
+}
+OUTPUT
+ 
+
+
+1b) Instead of making class Point3d a friend of class Vector3d, make member function Point3d::moveByVector a friend of class Vector3d.
+CODE
+#include <iostream>
+using namespace std;
+
+
+class Vector3d;  
+class Point3d
+{
+private:
+	double m_x, m_y, m_z;
+public:
+	Point3d(double x = 0.0, double y = 0.0, double z = 0.0)
+		: m_x(x), m_y(y), m_z(z)
+	{
+
+	}
+	void print()
+	{
+		std::cout << "Point(" << m_x << " , " << m_y << " , " << m_z << ")\n";
+	}
+	void  moveByVector(Vector3d v);
+
+};
+class Vector3d
+{
+private:
+	double m_x, m_y, m_z;
+public:
+	Vector3d(double x = 0.0, double y = 0.0, double z = 0.0)
+		: m_x(x), m_y(y), m_z(z)
+	{
+
+	}
+	void print()
+	{
+		std::cout << "Vector(" << m_x << " , " << m_y << " , " << m_z << ")\n";
+	}
+	friend void Point3d::moveByVector(Vector3d v);   // friend function
+};
+
+void Point3d::moveByVector(Vector3d v)
+{
+	m_x = m_x + v.m_x;
+	m_y = m_y + v.m_y;
+	m_z = m_z + v.m_z;
+}
+
+int main()
+{
+	// objects:
+	Point3d p(1.0, 2.0, 3.0);
+	Vector3d v(2.0, 2.0, -3.0);
+
+	p.print();
+	v.print();
+	p.moveByVector(v);   // object is passed (v)
+	p.print();
+	system("pause");
+	return 0;
+}
+OUTPUT
+ 
+
+1c) Reimplement the solution to quiz question 1b using 5 separate files: Point3d.h,
+Point3d.cpp, Vector3d.h, Vector3d.cpp, and main.cpp
+
+//main.cpp file
+#include <iostream>
+#include "Point3d.h"
+#include "Vector3d.h"
+using namespace std;
+int main()
+{
+	Point3d p(1.0, 2.0, 3.0);       //object p of class Point3d
+	Vector3d v(2.0, 2.0, -3.0);     //object v of class Vector3d
+
+	p.print();     
+	v.print();
+	cout << "Function is called." << endl;
+	p.moveByVector(v);
+	p.print();
+	system("pause");
+	return 0;
+}
+
+
+//Vector3d.h file
+#ifndef VECTOR3D_H
+#define VECTOR3D_H
+
+
+class Vector3d
+{
+private:
+	double m_x, m_y, m_z;  
+public:
+	Vector3d(double x, double y, double z);  // constructor
+	void print();
+	friend void Point3d::moveByVector(Vector3d v);  // function of class Point3d but friend of Vector3d
+};
+#endif 
+
+
+//Vector3d.cpp file
+#include <iostream>
+#include "Point3d.h"
+#include "Vector3d.h"
+using namespace std;
+// function definitions
+Vector3d::Vector3d(double x = 0.0, double y = 0.0, double z = 0.0)
+		: m_x(x), m_y(y), m_z(z){}
+
+void Vector3d:: print()
+	{
+		std::cout << "Vector(" << m_x << " , " << m_y << " , " << m_z << ")\n";
+	}
+
+
+
+//Point3d.h
+#ifndef POINT3D_H
+#define POINT3D_H
+
+class Vector3d;    // forward deceleration
+class Point3d
+{
+private:
+	double m_x, m_y, m_z;
+public:
+	Point3d(double x, double y, double z);   //constructor
+	void print();   // print function
+	void  moveByVector(Vector3d v);    // function prototype_
+
+};
+
+
+#endif // POINT3D_H
+
+
+
+//Point3d.cpp
+#include <iostream>
+#include "Point3d.h"
+#include "Vector3d.h"
+using namespace std;
+
+Point3d::Point3d(double x = 0.0, double y = 0.0, double z = 0.0)
+	: m_x(x), m_y(y), m_z(z) {}
+
+void Point3d::print()
+{
+	std::cout << "Vector(" << m_x << " , " << m_y << " , " << m_z << ")\n";
+}
+void Point3d::moveByVector(Vector3d v)
+{
+	m_x = m_x + v.m_x;
+	m_y = m_y + v.m_y;
+	m_z = m_z + v.m_z;
+}
+
+
+
+
