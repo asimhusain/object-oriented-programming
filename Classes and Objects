@@ -1,0 +1,110 @@
+Task
+Develop a program that implements a C++ class “Student” with following data members
+•	Age
+•	Roll Number
+•	GPA
+•	markSubject1
+•	marksSubject2
+•	marksSubject3
+The class should define a method/function to calculate percentage from marks obtained in three subjects.
+Finally, you’ll create objects of Student class, initialize their data members through set and get functions, calculate percentages, determine grades and print summary in the end.
+#include<iostream>
+using namespace std;
+class student
+{
+private:
+	int age;
+	int rollno;
+	float GPA;
+	float mark1, mark2, mark3;
+public:
+	//getting rollno 
+	int getrollno()
+	{
+		return rollno;
+	}
+	void setrollno(int i)
+	{
+		rollno = i;
+	}
+	//getting age
+	int getage()
+	{
+		return age;
+	}
+	void setage(int i)
+	{
+		age = i;
+	}
+	//getting mark of subject 1
+	float getmark1()
+	{
+		return mark1;
+	}
+	void setmark1(float i)
+	{
+		mark1 = i;
+	}
+	//getting marks of subject 2
+	float getmark2()
+	{
+		return mark2;
+	}
+	void setmark2(float i)
+	{
+		mark2 = i;
+	}
+	//getting marks of subject 3
+	float getmark3()
+	{
+		return mark3;
+	}
+	void setmark3(float i)
+	{
+		mark3 = i;
+	}
+	//function to calculate ther GPA 
+	void getGPA()
+	{
+		float avg = (mark1 + mark2 + mark3) / 3;
+		if (avg > 80)
+		{
+			cout << "GPA is 4\n";
+		}
+		if (avg < 80 && avg>60)
+		{
+			cout << "GPA is 3.5\n";
+		}
+		if (avg < 60 && avg>40)
+		{
+			cout << "GPA is 3\n";
+		}
+		if (avg<40)
+			cout << "GPA is less than 3\n";
+
+
+	}
+};
+int main()
+{
+	int x, age, r, y, z;
+
+	student std;
+	cout << "Enter Age: ";
+	cin >> age;
+	cout << "Enter rollno: ";
+	cin >> r;
+	cout << "Enter marks of subjects: ";
+	cin >> x >> y >> z;
+	std.setrollno(r);
+	std.setage(age);
+	std.setmark1(x);
+	std.setmark2(y);
+	std.setmark3(z);
+	std.getGPA();
+	system("pause");
+	return 0;
+
+
+}
+
