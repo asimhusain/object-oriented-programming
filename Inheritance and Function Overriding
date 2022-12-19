@@ -1,0 +1,443 @@
+Task 1: Implement the following class hierarchy
+
+TEACHER 
+^
+|
+SCHOLAR 
+^
+|
+AUTHOR
+
+
+
+
+1)	Add appropriate data member in all the classes
+a.	Add name and age in both Teacher and Author classes
+2)	Add default and parameterized constructors and destructor in all the classes
+3)	Write appropriate overridden getter, setter functions 
+4)	In main program create object of Author class and display all values inherited members from base classes and its own member
+
+Task 2: Modification & Extension
+1)	Add a common base class Person 
+2)	Remove name and age data members from Teacher and Author classes and add these data members in common base class Person
+3)	Also add constructor and destructor in Person class
+4)	Create object of Author class in main program. Display all data and see the behavior and order for constructors and destructors. Explain why?
+TASK 2
+Person header file
+#ifndef PERSON_HEADER
+#define PERSON_HEADER
+
+#include<iostream>
+using namespace std;
+#include<string>
+class person {
+private:
+	string name;
+	int age;
+public:
+	person();
+	~person();
+	void setname(string);
+	string getname();
+	void setage(int);
+	int getage();
+
+};
+#endif
+
+
+Person cpp file
+#include"person.h"
+person::person() {
+	cout << " Constructor of Person Class is Called\n" << endl;
+	cout << "please enter the name of the person: ";
+	cin >> name;
+	cout << "Please enter the age of the person: ";
+	cin >> age;
+}
+
+person::~person() {
+	cout << "Destructor of Person Class is Called\n" << endl;
+}
+void person::setname(string name) {
+	this->name = name;
+}
+string person::getname() {
+	return name;
+}
+void person::setage(int age) {
+	this->age = age;
+}
+int person::getage() {
+	return age;
+}
+Teacher cpp file
+#include"teacher.h"
+teacher::teacher() {
+	cout << "Constructor of Teacher Class is Called" << endl;
+	cout << "Enter the subject of the teacher: ";
+	cin >> ws;
+	getline(cin, subject);
+
+}
+
+teacher::~teacher() {
+	cout << "Destructor  of Teacher Class is Called" << endl;
+}
+void teacher::setsubject(string subject) {
+	this->subject = subject;
+}
+string teacher::getsubject() {
+	return subject;
+}
+
+Teacher header file
+#ifndef TEACHER_HEADER
+#define TEACHER_HEADER
+#include<iostream>
+using namespace std;
+#include"person.h"
+class teacher : public person {
+private:
+	string subject;
+public:
+	teacher();
+	~teacher();
+	void setsubject(string );
+	string getsubject();
+
+};
+#endif
+
+
+Scholar header file
+#ifndef SCHOLAR_HEADER
+#define SCHOLAR_HEADER
+#include<iostream>
+using namespace std;
+#include"teacher.h"
+class scholar : public teacher {
+private:
+	string book;
+public:
+	scholar();
+	~scholar();
+	void setbook();
+	string getbook();
+
+
+};
+#endif
+
+Scholar cpp file
+#include"scholar.h"
+scholar::scholar() {
+	cout << "Constructor  of Teacher Class is Called" << endl;
+	cout << "Enter the Book of the scholar: ";
+	cin >> ws;
+	getline(cin, book);
+
+}
+
+scholar::~scholar() {
+	cout << "Destructor  of Scholar Class is Called" << endl;
+}
+void scholar::setbook() {
+	this->book = book;
+}
+string scholar::getbook() {
+	return book;
+}
+Author header file
+#ifndef AUTHOR_H
+#define AUTHOR_H
+#include<iostream>
+using namespace std;
+#include"scholar.h"
+class author : public scholar {
+private:
+	string story;
+public:
+	author();
+	~author();
+	void setstoryl();
+	string getstory();
+	void display();
+
+
+};
+#endif
+
+Author cpp file
+#include"author.h"
+author::author() {
+	cout << "Constructor  of Teacher Class is Called" << endl;
+	cout << "Enter the story name of the author: ";
+	getline(cin, story);
+}
+
+author::~author() {
+	cout << "\nDesstructor  of Author Class is Called" << endl;
+}
+void author::setstoryl() {
+	this->story = story;
+}
+string author::getstory() {
+	return story;
+}
+void author::display() {
+	cout << "\n\nThe name entered is: " << getname() << endl;
+	cout << "The age entered is: " << getage() << endl;
+	cout << "The subject entered is: " << getsubject() << endl;
+	cout << "The Book entered is: " << getbook() << endl;
+	cout << "The story entered is: " << getstory() << endl;
+}
+
+
+Main file
+
+#include"person.h"
+#include"author.h"
+#include"scholar.h"
+#include"teacher.h"
+int main() {
+	{
+		author o1;
+		o1.display();
+	}
+	system("pause");
+	return 0;
+}
+
+
+OUTPIT
+ 
+NOTE: 
+Constructor are called in following order
+1)	Person class
+2)	Teacher class
+3)	Scholar class
+4)	Author class
+Destructor are called in following order 
+1)	Author class
+2)	Scholar class
+3)	Teacher class
+4)	Person class
+
+Task 2:_______________________________________________________________________________
+Develop programs in C++ for following problem: 
+•	Consider a class Item that stores the:
+o	Title of an item
+o	Price
+o	Array of three variables to only record the sales in Rupees of a particular item for the last three months
+o	Has its own function getters and setters
+•	Another class HardwareItem stores:
+o	Title of an item
+o	Price
+o	Array of three variables to record the sales in Rupees of a particular item for the last three months
+o	Equipment Manufacturer Name
+o	Has its own overridden getters and setters
+•	Another class SoftwareItem stores:
+o	Title of an item
+o	Price
+o	Array of three variables to record the sales in Rupees of a particular item for the last three months
+o	Supported operating system name on which software item runs
+o	Has its own overridden getters and setters
+
+Develop a program, using Object Oriented techniques(inheritance) and appropriate datatypes to construct the necessary classes ensuring maximum code reuse. Donot add code for constructors. 
+The application must work for the following test function:
+int main()
+{
+Item *it=new Item;
+HardwareItem h1;
+SoftwareItem *s= new SoftwareItem;
+it->getData();
+it->DisplayData();
+h1.getData();
+h1.DisplayData();
+s->getData();
+s->DisplayData();
+delete h1;
+}
+ITEAM HEADER FILE
+#ifndef item_header
+#define item_header
+#include<iostream>
+using namespace std;
+#include<string>
+class Item {
+private:
+	string title;
+	double price;
+	double sales[3];
+public:
+	Item();
+	~Item();
+	void settitle(string );
+	void setprice(double );
+	string gettitle();
+	double getprice();
+	void getData();
+	void DisplayData();
+};
+#endif
+
+HARDWARE HEDER FILE
+#ifndef hardware_header
+#define hardware_header
+#include<iostream>
+using namespace std;
+#include<string>
+#include"item.h"
+class HardwareItem : private Item {
+private:
+	string manufacture_name;
+public:
+	HardwareItem();
+	~HardwareItem();
+	void setmanufacture_name(string );
+	string getmanufacture_name();
+	void getData();
+	void DisplayData();
+};
+#endif
+
+
+SOFTWARE HEADER FILE
+#ifndef SOFTWARE_H
+#define SOFTWARE_H
+#include<iostream>
+using namespace std;
+#include<string>
+#include"item.h"
+class SoftwareItem : private Item {
+private:
+	string operatingsystem;
+public:
+	SoftwareItem();
+	~SoftwareItem();
+	void setoperatingsystem(string );
+	string getoperatingsystem();
+	void getData();
+	void DisplayData();
+};
+#endif
+ITEAM CPP FILE
+#include"Item.h"
+Item::Item() {
+
+}
+Item::~Item() {
+	cout << "Item Class Destructor called" << endl;
+}
+void Item::settitle(string title) {
+	this->title = title;
+}
+void Item::setprice(double price) {
+	this->price = price;
+}
+string Item::gettitle() {
+	return title;
+}
+double Item::getprice() {
+	return price;
+}
+void Item::getData() {
+	cout << "\n";
+	cout << "Enter the title of the item: ";
+	cin >> title;
+	cout << "Enter the price of the item: ";
+	cin >> price;
+	cout << "Number of item sold in first month: ";
+	cin >> sales[0];
+	sales[0] *= price;
+	cout << "Number of item sold in second month: ";
+	cin >> sales[1];
+	sales[1] *= price;
+	cout << "Number of item sold in third month: ";
+	cin >> sales[2];
+	sales[2] *= price;
+
+}
+void Item::DisplayData() {
+	
+	cout << "\nThe title of the item entered is: " << title <<endl;
+	cout << "The price per item is: " << price << endl;
+	cout << "The sale in Rupees of the item in first month: " << sales[0] << endl;
+	cout << "The sale in Rupees of the item in second month: " << sales[1] << endl;
+	cout << "The sale in Rupees of the item in third month: " << sales[2] << endl;
+
+}
+
+HARDWARE CPP FILE
+#include"hardware.h"
+HardwareItem::HardwareItem() {
+
+}
+HardwareItem::~HardwareItem() {
+	cout << " Destructor of Class HardwareItem is called" << endl;
+}
+void HardwareItem::getData() {
+	cout << "***************HardwareItem***************" << endl;
+	Item::getData();
+	cout << "Enter the Equipment Manufacture Name: ";
+	cin >> manufacture_name;
+}
+void HardwareItem::setmanufacture_name(string Equipment_Manufacture_Name) {
+	this->manufacture_name = manufacture_name;
+}
+string HardwareItem::getmanufacture_name() {
+	return manufacture_name;
+}
+void HardwareItem::DisplayData() {
+	Item::DisplayData();
+	cout << "The manufacturer of the item is: " << manufacture_name << endl;
+}
+
+
+SOFTWARE CPP FILE
+#include"software.h"
+SoftwareItem::SoftwareItem() {
+
+}
+SoftwareItem:: ~SoftwareItem() {
+	cout << "SoftwareItem Class Destructor called" << endl;
+}
+void SoftwareItem::setoperatingsystem(string operatingsystem) {
+	this->operatingsystem = operatingsystem;
+}
+string SoftwareItem::getoperatingsystem() {
+	return operatingsystem;
+}
+void SoftwareItem::getData() {
+	cout << "***************softwareitem***************" << endl;
+	Item::getData();
+	cout << "Enter the operating system of the software item: ";
+	cin >> operatingsystem;
+}
+void SoftwareItem::DisplayData() {
+	Item::DisplayData();
+	cout << "The operating system of the Software Item is: " << operatingsystem << endl;
+}
+
+MAIN FILE
+#include"item.h"
+#include"hardware.h"
+#include"software.h"
+int main()
+{
+	Item *it = new Item;
+	HardwareItem h1;
+	SoftwareItem *s = new SoftwareItem;
+	it->getData();
+	it->DisplayData();
+	h1.getData();
+	h1.DisplayData();
+	s->getData();
+	s->DisplayData();
+	system("pause");
+	return 0;
+}
+OUTPUT
+ 
+
