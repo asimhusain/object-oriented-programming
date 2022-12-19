@@ -1,0 +1,413 @@
+Task 1:
+a)	Understand and execute the given example.
+b)	Verify the three cases of Base Class Access 
+c)	Try to access the three data members of base class in derived class (in some function) for each of three cases, and if access is not possible (in any case), try to find a solution. Note: do not change the access of data members: length, width and height in base class.
+Part c(public access)
+#include <iostream>
+using namespace std;
+class Cuboid {
+private:
+	double length;
+protected:
+	double width;
+public:
+	int getlength() {
+		return length;
+	}
+	int getwidth() {
+		return width;
+	}
+	double height;
+	Cuboid() : length(2), width(3), height(4)
+	{
+		cout << " Base Class : Default Constructor " << endl;
+	}
+	Cuboid(double a, double b, double c) : length(a), width(b), height(c)
+	{
+		cout << " Base Class : Parameterized Constructor " << endl;
+	}
+	void setData(double a, double b, double c)
+	{
+		length = a;
+		width = b;
+		height = c;
+	}
+	void displayData(double a, double b, double c)
+	{
+		cout << "length = " << length << endl;
+		cout << "width = " << width << endl;
+		cout << "height = " << height << endl;
+	}
+	~Cuboid()
+	{
+		cout << " Base Class : Destructor " << endl;
+	}
+	
+};
+
+class myCuboid : public Cuboid {
+public:
+	void getvalue() {
+		cout << " length of cuboid:" << getlength() << endl;
+		cout << " width is cuboid:" << getwidth() << endl;
+	}
+	myCuboid()
+	{
+		cout << "  Derived Class: Default Constructor " << endl;
+	}
+
+	void calculateVolume()
+	{
+		cout << " Volume of cuboid : " << getlength() * width * height<<endl;
+	}
+
+	~myCuboid()
+	{
+		cout << " Derived Class : Destructor " << endl;
+	}
+};
+
+int main()
+{
+	myCuboid cube;
+	cube.calculateVolume();
+	cube.getvalue();
+	cout << "The height of cuboid is:" << cube.height << endl;
+	system("pause");
+	return 0;
+}
+
+
+ 
+
+Part c(protected access)
+#include <iostream>
+using namespace std;
+class Cuboid {
+private:
+	double length;
+protected:
+	double width;
+public:
+	double height;
+	Cuboid() : length(2), width(3), height(4)
+	{
+		cout << " Base Class : Default Constructor " << endl;
+	}
+	Cuboid(double length , double width, double  height)
+	{
+		this->length = length;
+		this->width = width;
+		this->height = height;
+	   cout << " Base Class : Parameterized Constructor " << endl;
+	}
+	void setData(double a, double b, double c)
+	{
+		length = a;
+		width = b;
+		height = c;
+	}
+	void displayData(double a, double b, double c)
+	{
+		cout << "Length of Cuboid = " << length << endl;
+		cout << "Width of Cuboid = " << width << endl;
+		cout << "Height of Cuboid = " << height << endl;
+	}
+	~Cuboid()
+	{
+		cout << " Base Class : Destructor " << endl;
+	}
+	void calculateVolume()
+	{
+		cout << " Volume of cuboid : " << length * width * height<<endl;
+	}
+	double getlength() {
+		return length;
+	}
+
+};
+
+class myCuboid : protected Cuboid {
+public:
+	void derivedlength() {
+		cout << "The length (from child class):" << getlength() << endl;
+	}
+	void derivedwidth() {
+		cout << "The width (from child class):" << width << endl;
+	}
+	void derivedheight() {
+		cout << "The height (from child class):" << height << endl;
+	}
+
+	void volume() {
+		calculateVolume();
+	}
+	~myCuboid()
+	{
+		cout << " Derived Class : Destructor " << endl;
+	}
+};
+
+int main()
+{
+	myCuboid object;
+	object.volume();
+	object.derivedlength();
+	object.derivedwidth();
+	object.derivedheight();
+	system("pause");
+	return 0;
+}
+
+
+output
+ 
+Part c (private access)
+#include <iostream>
+using namespace std;
+class Cuboid {
+private:
+	double length;
+protected:
+	double width;
+public:
+	double height;
+	Cuboid() : length(2), width(3), height(4)
+	{
+		cout << " Base Class : Default Constructor " << endl;
+	}
+	Cuboid(double length, double width, double  height)
+	{
+		this->length = length;
+		this->width = width;
+		this->height = height;
+		cout << " Base Class : Parameterized Constructor " << endl;
+	}
+
+	void setData(double a, double b, double c)
+	{
+		length = a;
+		width = b;
+		height = c;
+	}
+	void displayData(double a, double b, double c)
+	{
+		cout << "length of cuboid = " << length << endl;
+		cout << "width of cuboid = " << width << endl;
+		cout << "height of cuboid = " << height << endl;
+	}
+	~Cuboid()
+	{
+		cout << " Base Class : Destructor " << endl;
+	}
+	void calculateVolume()
+	{
+		cout << " Volume of cuboid : " << length * width * height;
+	}
+	double getlength() {
+		return length;
+	}
+	double getwidth() {
+		return width;
+	}
+	double getheight() {
+		return height;
+	}
+};
+
+class myCuboid : private Cuboid {
+public:
+	void derivedlength() {
+		cout << "The length (from child class):" << getlength() << endl;
+	}
+	void derivedwidth() {
+		cout << "The width (from child class):" << getwidth() << endl;
+	}
+	void derivedheight() {
+		cout << "The height (from child class):" << getheight() << endl;
+	}
+	void volume() {
+		calculateVolume();
+	}
+	~myCuboid()
+	{
+		cout << " Derived Class : Destructor " << endl;
+	}
+};
+
+int main()
+{
+	myCuboid object;
+	object.volume();
+	object.derivedlength();
+	object.derivedwidth();
+	object.derivedheight();
+	system("pause");
+	return 0;
+}
+
+
+ 
+
+A software based startup company has two software development teams. Each team has four employees.   After completion of each successful project delivered to the client, a bonus is given to the team that has completed the project. Each year the CEO of the company announces performance based increments (based on the annual profit of the company) which is added in the basic salary of each employee.  
+Create a set of classes to implement the above scenario by using Inheritance, friend functions wherever applicable.
+You have to keep track of the number of projects completed by the company and the overall profit after deducting the salaries of staff and miscellaneous expenditures.
+In the driver class, create an object of Company and add employees. The programming interface should have provisions to include/organize employees in development teams, assign project to a development team and print salaries after performance based increments.
+Deliverables
+Compile a single Word document by filling in the solution/answer part and submit this Word file on LMS. 
+This lab is graded. Min marks: 0. Max marks: 10.
+
+Code
+#include<iostream>
+#include<string>
+using namespace std;
+class Company {
+	double investment;
+	double expenditure;
+	double salaryemployee;
+	int nooftask;
+	double profit;
+	double bonus;
+	double bonusemployee;
+public:
+	void setinvestment(double x);
+	double getinvestment();
+	void setexpenditure(double x);
+	double getexpenditure();
+	void setsalary(double x);
+	void task(int x);
+	void setbonus();
+	double getbonus();
+	void setbonusemployee();
+	void setnewsalary();
+	double getsalaryemployee();
+	void bonusmultiplier(int x);
+};
+void Company::setinvestment(double investment) {
+	this-> investment = investment;
+}
+double Company::getinvestment() {
+	return investment;
+}
+void Company::setexpenditure(double expenditure) {
+	this-> expenditure = expenditure;
+}
+double Company::getexpenditure() {
+	return expenditure;
+}
+void Company::setsalary(double salaryemployee) {
+	this-> salaryemployee = salaryemployee;
+}
+void Company::task(int nooftask) {
+	this-> nooftask = nooftask;
+}
+void Company::setbonus() {
+	bonus = salaryemployee * 0.05;  //5% extra bounus
+}
+double Company::getbonus() {
+	return bonus;
+}
+void Company::setbonusemployee() {
+	bonusemployee = bonus / 4;
+}
+void Company::setnewsalary() {
+	salaryemployee += bonusemployee;
+}
+double Company::getsalaryemployee() {
+	return salaryemployee;
+}
+void Company::bonusmultiplier(int x) {
+	bonus = bonus * x;
+}
+
+class Team1 :public Company {
+	string employ1, employ2, employ3, employ4;
+	int assignedtask;
+public:
+	void setemploy1(string );
+	void setemploy2(string );
+	void setemploy3(string );
+	void setemploy4(string );
+	void settask(int x);
+	int getassignedtask();
+};
+void Team1::setemploy1(string employ1) {
+	this-> employ1 = employ1;
+}
+void Team1::setemploy2(string employ2) {
+	this-> employ2 = employ2;
+}
+void Team1::setemploy3(string employ3) {
+	this-> employ3 = employ3;
+}
+void Team1::setemploy4(string employ3) {
+	this-> employ3 = employ3;
+}
+void Team1::settask(int assignedtask) {
+	this-> assignedtask  = assignedtask;
+}
+int Team1::getassignedtask() {
+	return assignedtask;
+}
+class Team2 :public Team1 {
+public:
+	friend int gett2tasknumber(Team2);
+};
+int gett2tasknumber(Team2 t2) {
+	return  t2.getassignedtask();
+} 
+int main() {
+	string name;
+	double amount;
+	int task;
+	Team1 team1;
+	Team2 team2;
+	cout << "Enter the amout of revenue generated: ";
+	cin >> amount;
+	team1.setinvestment(amount);
+	team2.setinvestment(amount);
+	cout << "Enter the total amount of expenditure: ";
+	cin >> amount;
+	team1.setexpenditure(amount);
+	team2.setexpenditure(amount);
+	cout << "Enter the salary of each employe: ";
+	cin >> amount;
+	team1.setsalary(amount);
+	team2.setsalary(amount);
+	team1.setbonus();
+	team2.setbonus();
+	cout << "Bonus on completing the project is : " << team1.getbonus() << endl;
+	cout << "Enter the number of tasks" << endl;
+	cout << "Team 1: "; cin >> task; team1.settask(task);
+	cout << "Team 2: "; cin >> task; team2.settask(task);
+	cout << "Enter name of your members" << endl;
+	cout << "Employee 1 : "; cin >> name;
+	team1.setemploy1(name);
+	cout << "Employee 2 : "; cin >> name;
+	team1.setemploy2(name);
+	cout << "Employee 3 : "; cin >> name;
+	team1.setemploy3(name);
+	cout << "Employee 4 : "; cin >> name;
+	team1.setemploy4(name);
+	cout << "Member of team 2:" << endl;
+	cout << "Employee 1 : "; cin >> name;
+	team2.setemploy1(name); 
+	cout << "Employee 2 : "; cin >> name;
+	team2.setemploy2(name);
+	cout << "Employee 3 : "; cin >> name;
+	team2.setemploy3(name);
+	cout << "Employee 4 : "; cin >> name;
+	team2.setemploy4(name);
+	cout << "Team 1 completed " << team1.getassignedtask() << " and Team 2 did " << gett2tasknumber(team2) << endl;
+	team1.bonusmultiplier(team1.getassignedtask());
+	team2.bonusmultiplier(team2.getassignedtask());
+	team1.setbonusemployee();team2.setbonusemployee();
+	team1.setnewsalary();team2.setnewsalary();
+	cout << "The new salary of the employees of team 1 is Rs." << team1.getsalaryemployee() << " and " << " From team 2 is Rs. " << team2.getsalaryemployee() << endl;
+	cout << "Thus the total profit the company earned is :" << team1.getinvestment() - team2.getexpenditure() - team1.getsalaryemployee() - team2.getsalaryemployee() << endl;
+	system("pause");
+}
+
+
+ 
+
