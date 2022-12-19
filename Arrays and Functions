@@ -1,0 +1,94 @@
+Task # 1
+Write a program in c++ using following functions which initializes an array with random numbers (Assume N= 10), print and sort the array using two different functions. Define a function boolfind to find certain element in the array. You must use the 4 functions mentioned below. You must pass array to functions using pointers. 
+
+#include<iostream>
+#include<conio.h>
+#include<ctime>
+#include<cstdlib>
+#include<algorithm>
+using namespace std;
+// this initializes an array of size N with random values.
+void populate_array(int *array, int N);
+// this function prints the entire array.
+void print_array(int *array, int N);
+//sort the elements of array
+void  sort_array(int *array, int N);
+//find the element in the array
+void boolfind(int *array, int N);
+int main()
+{
+	int a;
+	srand(time(NULL));
+	cout << "Enter a number ";
+	cin >> a;
+	int *array = new int[a];
+	populate_array(array, a);
+	cout << "Populated array is\n";
+	print_array(array, a);
+	cout << "\nsorted array is\n";
+	sort_array(array, a);
+	print_array(array, a);
+	boolfind(array, a);
+	_getch();
+}
+
+//populating array with random number
+void populate_array(int *array, int N)
+{
+	for (int i = 0; i < N; i++)
+	{
+		*array = rand() % 100;
+		array++;
+	}
+}
+
+//function to print the function
+void print_array(int *array, int N)
+{
+	for (int i = 0; i < N; i++)
+	{
+		cout << *array << " ";
+		array++;
+	}
+}
+
+//sorting array by bubble sort method
+void sort_array(int *array, int N)
+{
+	int round, i, temp;
+	for (round = 0; round < N; round++)
+	{
+		for (i = 0; i < N-round-1; i++)
+		if (*(array + i)>*(array + i + 1))
+		{
+			temp = *(array + i); 
+			*(array + i) = *(array + i + 1);
+			*(array + i + 1) = temp;
+		}
+	}
+}
+
+//searching the element in the array
+void boolfind(int *array, int N)
+{
+	int x;
+	bool y = 0;
+	cout << "\nEnter element to Find in the array\n";
+	cin >> x;
+	for (int i = 0; i < N; i++)
+	{
+		if (*array == x)
+		{
+			cout << "Element is in the array\n" ; 
+			y = 1;
+			break;
+		}
+		array++;
+	}
+	if (y == 0)
+	{
+		cout << "Element is not in the array";
+	}
+}
+
+
