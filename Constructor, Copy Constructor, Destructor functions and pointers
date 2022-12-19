@@ -1,0 +1,246 @@
+Lab Task 1
+Complex Class:
+Create a class called Complex for performing arithmetic with complex numbers. 
+Complex numbers have the form 
+
+realPart + imaginaryPart * i
+where i is √(-1)
+
+Use double variables to represent the private data of the class. 
+Provide a default constructor should assign default values in case no initializers are provided.
+Provide a parameterized constructor that enables an object of this class to be initialized when it’s declared.
+Provide public member functions that perform the following tasks:
+	Printing Complex numbers in the form a + bi : where a is the real part and b is the imaginary part.
+	Calculating conjugate:  calculates and displays the conjugate of a complex number. For example:  conjugate of 3 + 4i is 3 − 4i.
+Write a program to test your class. Use copy constructor to copy the contents of one object to another. Write a destructor for the class that displays “Object destroyed”.
+
+
+
+#include<iostream>
+using namespace std;
+//**********complex class************************
+class Complex
+{
+private:
+	float realpart;
+	float imaginarypart;
+public:
+	//default constructer
+	Complex()
+	{
+		realpart = 0;
+		imaginarypart = 0;
+	}
+	//parametraized constructor
+	Complex(float r, float i)
+	{
+		realpart = r;
+		imaginarypart = i;
+	}
+	void print(float r, float i);
+	void conjugate(float r, float i);
+
+	double getImaginarypart()
+	{
+		return imaginarypart;
+	}
+	double getrealpart()
+	{
+		return realpart;
+	}
+	void setRealpart(double re)
+	{
+		realpart = re;
+	}
+
+	void setImag(double im)
+	{
+		imaginarypart = im;
+	}
+	Complex::~Complex();
+
+};
+
+void Complex::print(float r, float i)
+{
+	if (i > 0)
+	{
+		cout << r << "+i" << i << endl;
+	}
+	else
+	{
+		cout << r << "i" << i << endl;
+	}
+}
+void Complex::conjugate(float r, float i)
+{
+	i = -i;
+	if (i < 0)
+	{
+		cout << r << i << "i" << endl;
+	}
+	else
+	{
+
+		cout << r << "+i" << i << endl;
+	}
+	
+
+}
+Complex::~Complex(){
+	cout << "Object Destroyed";
+}
+int main()
+{
+	float a, b;
+	cout << "Enter a real part of first number ";
+	cin >> a;
+	cout << "Enter imaginary part of first number ";
+	cin >> b;
+	Complex C1(a, b), C2(C1);
+	cout << "Complex Form of first number is ";
+	C1.print(a, b);
+
+	cout << "Conjugate of first number is ";
+	C1.conjugate(a, b);
+	C1.~Complex();
+	cout << "\n*********************************" << endl;
+	cout << "Enter a real part of second number ";
+	cin >> a;
+	cout << "Enter imaginary part of second number ";
+	cin >> b;
+
+	cout << "Complex Form of second number is ";
+	C2.print(a, b);
+
+	cout << "Conjugate of second number is ";
+	C2.conjugate(a, b);
+	C2.~Complex();
+	cout << "\n";
+	system("pause");
+}
+
+Task # 2 Part a
+Write a program for temperature conversion from Celsius to Fahrenheit by using a function 
+
+float celsiustofahrenheit ( float *temp); //prototype 
+
+Note: For conversion from C to °F:	Multiply by 9, then divide by 5, then add 32
+ 
+#include<iostream>
+using namespace std;
+float celsiustofahrenheit(float *temp); //prototype 
+int main()
+{
+	float celsius;
+	cout << "Enter temperature in celsius" << endl;
+	cin >> celsius;
+	cout << "Temperature in farhenite is " << celsiustofahrenheit(&celsius) << endl;
+	system("pause");
+	return 0;
+}
+float celsiustofahrenheit(float *temp)
+{
+	return ((*temp*1.8) + 32);
+}
+Task  # 2 Part b
+
+Write a program to swap values of two variables using pointers.
+#include<iostream>
+using namespace std;
+
+
+void swap(int *a, int *b)
+{
+	int swp;
+    swp = *a;
+	*a = *b;
+	*b = swp;
+}
+
+int main()
+{
+	int num1, num2;
+
+	cout << "Enter value of num1: ";
+	cin >> num1;
+	cout << "Enter value of num2: ";
+	cin >> num2;
+
+	//displaying numbers before swapping
+	cout << "Before Swapping " << num1 << num2 << endl;
+
+	//calling the user defined function swap()
+	swap(&num1, &num2);
+
+	//displaying numbers after swapping
+	cout << "After swaping " << num1 << num2<<endl;
+	system("pause");
+	return 0;
+}
+
+Task# 2 Part c
+
+Create an array and then sort the values in descending order and print values
+
+#include<iostream>
+using namespace std;
+#define MAX 100
+
+void sort(int *round, int s)
+{
+	int i, j;
+	int temp;
+	for (i = 1; i<s; i++)
+	{
+		for (j = 0; j<s - i; j++)
+		{
+			if (*(round + j)<*(round + j + 1))
+			{
+				temp = *(round + j);
+				*(round + j) = *(round + j + 1);
+				*(round + j + 1) = temp;
+			}
+		}
+
+	}
+
+}
+
+void main()
+{
+	int arr[MAX];
+	int i;
+	int size;
+	
+
+	cout<<"\nEnter the size of array :";
+	cin >> size;
+	if (size<0 || size>MAX)
+	{
+		cout << "Input valid range!!!" << endl;
+		system("pause");
+	}
+	for (i = 0; i<size; i++)
+	{
+		cout << "Enter element [" << i + 1 << "] ";
+		cin >> arr[i];
+	}
+	cout << "\nBefore Sorting\n";
+	for (i = 0; i<size; i++)
+	cout <<arr[i]<<"  ";
+	sort(arr, size);
+
+	cout << "\nAfter Aorting\n";
+	for (i = 0; i<size; i++)
+		cout <<arr[i]<<"  ";
+	system("pause");
+
+}
+
+
+
+
+
+
+
