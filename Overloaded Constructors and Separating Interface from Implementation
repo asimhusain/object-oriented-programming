@@ -1,0 +1,287 @@
+
+     	 
+
+
+Task#1
+Implement a Sandwich class that includes data members to represent a Sandwich filling, size, is_ready, and price. The class interface includes methods that provide appropriate access to the data members (e.g., methods to get/set the Sandwich's data). 
+
+class Sandwich{
+		string filling;
+		double price;
+		bool is_ready; 
+	……
+public: 
+		Sandwich(); 
+		Sandwich(string filling, double price);
+		
+		 
+		void setFilling(string);
+		void setPrice(double);
+		bool check_status(); 
+		void printData();
+};
+
+Provide implementations of default constructor and parameterized constructor.
+The setFilling() function sets the filling, and also sets the is_ready variable to true.
+
+
+
+
+
+
+
+
+
+
+     	 
+It is important to separate Class definition from the client code. This practice is considered as a fundamental software engineering principle. 
+The interface is separated from the implementation by splitting the class code into two files
+	The Header (GradeBook.h) 
+	Source-Code File (GradeBook.cpp)
+The class definition is stored in GradeBook.h and member functions are defined in GradeBook.cpp
+
+GradeBook.h
+#include <string>
+ using namespace std;
+class GradeBook
+{
+public:
+   GradeBook( string );
+   void setCourseName( string ); 
+   string getCourseName(); 
+   void displayMessage(); 
+private:
+ string courseName; // course name for this GradeBook
+ };
+
+
+Source-code file GradeBook.cpp defines class GradeBook’s member functions. Each member-function name in the function headers is preceded by the class name and :: which is known as the binary scope resolution operator. This “ties” each member function to the (now separate) GradeBook class definition, which declares the class’s member functions and data members. Without “GradeBook:: preceding each function name, these functions would not be recognized by the compiler as member functions of class GradeBook.
+
+GradeBook.cpp
+#include <iostream>
+#include "GradeBook.h"
+using namespace std;
+GradeBook::GradeBook( string name ){
+void GradeBook::setCourseName( name ){
+courseName = name; 
+}
+string GradeBook::getCourseName(){
+return courseName; 
+}
+void GradeBook::displayMessage(){
+cout<<"Welcome to the grade book for\n"<< getCourseName()<< "!" << endl;
+}
+
+Finally, we can write the client code in another file TestGradeBook.cpp. Separating GradeBook’s interface from the implementation of its member functions does not affect the way that this client code uses the class.
+
+#include <iostream>
+#include "GradeBook.h"
+using namespace std;
+int main(){
+GradeBook gradeBook1( "CS101 Introduction to C++ Programming" );
+GradeBook gradeBook2( "CS102 Data Structures in C++" );
+cout << "gradeBook1 created for course: "
+ << gradeBook1.getCourseName() << "\ngradeBook2 created for course:" << gradeBook2.getCourseName()  << endl;
+} 
+
+Task 2: Create a Simple Unit Conversion App that allows converting the following
+1.	Length (Foot to Meter, Centimeter etc)
+2.	Weight (Pounds to Kg, Kg to Pounds etc.)
+3.	Temperature ( Fahrenheit to Celsius,  Celsius to Fahrenheit)
+Apply Object Oriented Programming concepts to ensure that data is private and accessed properly through public interface comprising of set and get functions. 
+Split implementation across multiple files (Header Files and Source Code Files) to ensure that application design is modular. 
+Task 
+Implement Simple Unit Conversion App example in Visual Studio by creating three files
+a)	UnitConversion.h
+b)	UnitConversion.cpp
+c)	TestUnitConversion
+Write Client Code to create objects and convert units.
+Deliverables
+Compile a single Word document by filling in the solution/answer part and submit this Word file on LMS. 
+This lab is graded. Min marks: 0. Max marks: 10.
+
+Task 1
+code
+#include<iostream>
+using namespace std;
+#include<string>
+class Sandwich{
+	string filling;
+	double price;
+	bool is_ready;
+
+public:
+	Sandwich();
+	Sandwich(string filling, double price);
+
+	void printdata();
+	string getfilling();
+	double getprice();
+	void setfilling(string);
+	void setPrice(double);
+	bool check_status();
+
+};
+Sandwich::Sandwich()
+{
+	filling = "Empty";
+	price = 0.0f;
+ is_ready = false;
+}
+Sandwich::Sandwich(string f, double p)
+{
+	filling = f;
+	price = p;
+	bool is_ready;
+}
+void Sandwich::setfilling(string f)
+{
+	filling = f;
+}
+void Sandwich::setPrice(double p)
+{
+	price = p;
+}
+string Sandwich::getfilling()
+{
+	return filling;
+}
+double Sandwich::getprice()
+{
+	return price;
+}
+bool Sandwich::check_status()
+{
+	return is_ready;
+}
+void Sandwich::printdata()
+{
+	cout << "Your filling: " << filling << endl;
+	cout << "Price is: " << price << endl;
+	cout << "your sandwich is: " ;
+	if (check_status() == 0)
+	{
+		cout << "Not Ready\n";
+	}
+	else
+		cout << "Ready\n";
+}
+int main()
+{
+	string fill;
+	Sandwich S;
+	S.printdata();
+	cout << "*************************************" << endl;
+	cout << "Enter filling\n";
+	cin >> fill;
+	Sandwich C2(fill, 250.0f);
+	C2.setfilling(fill);
+	C2.printdata();
+	system("pause");
+	return 0;
+}
+output
+ 
+
+
+
+
+
+
+Task 2
+Header file
+#include<iostream>
+using namespace std;
+class Conversion
+{
+private:
+	float length;
+	float temp;
+	float weight;
+public:
+	float getlength();
+	float gettemp();
+	float getweight();
+	void setlength(float l);
+	void settemp(float t);
+	void setweight(float w);
+	float Foottometer();
+	float poundtokg();
+	float ftoc();
+};
+Source code
+#include<iostream>
+using namespace std;
+#include"Unitconversion.h"
+float Conversion::getlength()
+{
+	return length;
+}
+float Conversion::gettemp()
+{
+	return temp;
+}
+float Conversion::getweight()
+{
+	return weight;
+}
+void Conversion::setlength(float l)
+{
+	length = l;
+}
+void Conversion::settemp(float t)
+{
+	temp = t;
+}
+void Conversion::setweight(float w)
+{
+	weight = w;
+}
+float Conversion::Foottometer()
+{
+	length = (length / 3.2808);
+	return length;
+}
+float Conversion:: poundtokg()
+{
+	weight = weight*0.453592;
+	return weight;
+}
+float Conversion::ftoc()
+{
+	temp = (temp - 32)/1.8;
+	return temp;
+}
+
+Testfile
+#include<iostream>
+#include"Unitconversion.h"
+using namespace std;
+int main()
+{
+	Conversion C;
+	float l, w, t;
+	cout << "Enter Temperature in FARHENITE " << endl;
+	cin >> t;
+	C.settemp(t);
+	cout << "Enter length in FOOT " << endl;
+	cin >> l;
+	C.setlength(l);
+	cout << "Enter weight in POUND " << endl;
+	cin >> w;
+	C.setweight(w);
+	cout << "Foot to meter: " << C.Foottometer() << endl;
+	cout << "Pound to Kg: " << C.poundtokg() << endl;
+	cout << "Farhenite to Celcius: " << C.ftoc() << endl;
+	system("pause");
+	return 0;
+
+}
+
+
+
+
+Output
+ 
+
+
