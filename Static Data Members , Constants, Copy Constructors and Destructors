@@ -1,0 +1,111 @@
+Task (in this task you will use static data members and functions)
+Create a SavingsAccount class. Use a static data member annualInterestRate to store the annual interest rate for each of the savers. Each member of the class contains a private data member savingsBalance indicating the amount the saver currently has on deposit. Provide member function calculateMonthlyInterest that calculates the monthly interest by multiplying the savingsbalance by annualInterestRate divided by 12; this interest should be added to savingsBalance. Provide a static member function modifyInterestRate that sets the static annualInterestRate to a new value. 
+Write a driver/test program (main program) to test class SavingsAccount.
+•	Provide constructors and destructors for your program
+•	Instantiate two different objects of class SavingsAccount, saver1 and saver2, with balances of $2000.00 and $3000.00, respectively.
+•	Instantiate third objects of class SavingsAccount, saver3 with balance of  saver1 using default copy constructor. 
+•	Set the annualInterestRate to value of 3 percent.
+•	Then calculate the monthly interest and 
+•	print the new balances for each of the savers using constant function
+•	Then set the annualInterestRate to 7 percent, calculate the next month's interest and print the new balances for each of the savers.
+
+                                        HEADER FILE
+#include <iostream>
+class SavingsAccount
+{
+private:
+static double annualInterest;
+double savingsBalance;
+public:
+void setBalance(double);
+double MonthlyInterest();
+static void modifyInterestRate(double);
+SavingsAccount();
+~SavingsAccount();
+SavingsAccount(double);
+SavingsAccount(const SavingsAccount &);
+void displayMonthlyInterest();
+};
+
+                                                         SOURCE FILE
+#include <iostream>
+#include "saving.h"
+using namespace std;
+// default values of interesrt set to zero
+double SavingsAccount::annualInterest = 0.0;
+// Default Constructor
+SavingsAccount::SavingsAccount()
+{
+	savingsBalance = 0;
+}
+// Setting Balance
+void SavingsAccount::setBalance(double a)
+{
+	savingsBalance = a;
+}
+// Parameterized Constructor
+SavingsAccount::SavingsAccount(double a)
+{
+	setBalance(a);
+}
+//Destructor 
+SavingsAccount::~SavingsAccount()
+{
+	cout << "Distructor called" << endl;
+}
+//Monthly interest calculation
+double SavingsAccount::MonthlyInterest()
+{
+	double s = (((savingsBalance*annualInterest) / 12) + savingsBalance);
+	return s;
+}
+//modifying of balance
+void SavingsAccount::modifyInterestRate(double x)
+{
+	annualInterest = ((x) / 100.0);
+}
+SavingsAccount::SavingsAccount(const SavingsAccount &save)
+{
+	savingsBalance = save.savingsBalance;
+}
+void SavingsAccount::displayMonthlyInterest()
+{
+	cout << "The monthly savings(added interest) of the saver is " << MonthlyInterest() << "$" << endl;
+}
+
+                                                                        TEST FILE                                                                          
+#include "saving.h"
+#include <iostream>
+using namespace std;
+int main()
+{
+	SavingsAccount saver1(2000.0);                     
+	SavingsAccount saver2(3000.0); 
+	//copy the data of saver 1 into saver3
+	SavingsAccount saver3(saver1);    
+	//changing interest rate to 3% 
+	SavingsAccount::modifyInterestRate(3.0);         
+	//displaying of saver,s monthly interest and savings of 3% interest
+	cout << "\t\t-----------SAVER 1---------------" << endl;
+	saver1.displayMonthlyInterest();                   
+	cout << "\t\t-----------SAVER 2---------------" << endl;
+	saver2.displayMonthlyInterest();                  
+	cout << "\t\t-----------SAVER 3---------------" << endl;
+	saver3.displayMonthlyInterest();    
+	cout << "SAVING AFTER ADDING 7% INTEREST"<<endl;
+	//setting The annual Interest Rate to 7%
+	SavingsAccount::modifyInterestRate(7.0);          
+	//displaying of saver,s monthly interest and savings of 7% interest
+	cout << "\t\t-----------SAVER 1---------------" << endl;
+	saver1.displayMonthlyInterest();                 
+	cout << "\t\t-----------SAVER 2---------------" << endl;
+	saver2.displayMonthlyInterest();                 
+	cout << "\t\t-----------SAVER 3---------------" << endl;
+	saver3.displayMonthlyInterest();                 
+    system("pause");
+	return 0;
+}
+
+                                                        
+ 
+
