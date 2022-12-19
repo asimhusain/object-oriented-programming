@@ -1,0 +1,146 @@
+Task :
+Create an abstract person class with pure virtual functions getData() . The student and professor classes add new data items to the base class. The student class contains a variable gpa of type float, which represents the student’s grade point average (GPA). The professor class contains a variable numPubs, of type int, which represents the number of scholarly publications the professor has published. 
+The test program should let the user enter number of student and teacher names. For students, the program also asks for the GPA, and for professors it asks for the number of publications. When the user is finished, the program prints out the names of all the students and professors with their relevant information. 
+
+ 
+
+
+
+
+Person Header 
+#ifndef PERSON_HEADER
+#define PERSON_HEADER
+#include<iostream>
+#include<string>
+using namespace std;
+const int a = 100;
+class person
+{
+protected:
+	string name[a];                  //member function of abstract class
+public:
+	string getname(int);
+	void setname(int x, string name);
+	virtual void setData(int x) = 0;  // pure virtual function 
+};
+#endif
+Student Header
+#ifndef STUDENT_HEADER
+#define STUDENT_HEADER
+#include"person.h"
+class Student :public person
+{
+private:
+	float GPA[a];
+public:
+	void setData(int x);
+	void setGPA(int x, float GPA); //public member function for private data member
+};
+#endif
+ professor Header
+#ifndef PROFESSOR_HEADER
+#define PROFESSOR_HEADER
+#include"person.h"
+class professor :public person
+{
+private:
+	int publication[a];
+public:
+	void setData(int x);
+	void setpubs(float y);
+};
+#endif
+
+
+Person cpp
+#include"person.h"
+void person::setname(int x, string name)
+{
+	this->name[x] = name;
+}
+
+string person::getname(int x)
+{
+	return name[x];
+}
+
+void person::setData(int) {}
+Student cpp
+#include"student.h"
+void Student::setData(int x)
+{
+	cout << "Name of student is: " << getname(x) << endl;
+	cout << "GPA of student is: " << GPA[x] << endl;
+}
+void Student::setGPA(int x, float GPA)
+{
+	this->GPA[x] = GPA;
+}
+
+Professor cpp
+#include"professor.h"
+void professor::setData(int x)
+{
+	cout << "Name of Professor is:" << getname(x) << endl;
+	cout << "No of Publications of Professor is:" << publication[x] << endl;
+}
+void professor::setpubs(float z)
+{
+	publication[1] = z;
+}
+
+Main cpp
+#include"person.h"
+#include"student.h"
+#include"professor.h"
+int main()
+{
+	int pubs,no;
+	string name;
+	float gpa;
+	Student s1;   //object o student class
+	professor p; //object of professor class
+	person* Per1; //first pointer of abstract class 
+	person* Per2;//second pointer of abstract class
+	Per1 = &s1; //assigning adress of student's class object to abstract class's pointer
+	Per2 = &p;
+	cout << "Enter the number of students" << endl;
+	cin >> no;
+	//for loop to get desired number of students objects 
+	for (int i = 0; i <= no - 1; i++)
+	{
+		cout << "Enter the Name of Student" << endl;
+		cin.ignore();
+		getline(cin, name);
+		Per1->setname(i,name);
+		cout << "Enter GPA:";
+		cin >> gpa;
+		s1.setGPA(i, gpa);
+	}
+	//we are asked for only one input for professor
+	cout << "Enter the name of professor" << endl;
+	cin.ignore();
+	getline(cin,name);
+	p.getname(1);
+	cout << "Enter Number of Publication" << endl;
+	cin >> pubs;
+	p.setpubs(pubs);
+	//call of function through base pointers to display the input of students  
+	cout << "\n *****Students****" << endl;
+	for (int i = 0; i <= no - 1; i++)
+	{
+		Per1->setData(i);
+	}
+	//call of function through base pointers to display the input of professor
+	cout << "\n****Professor****" << endl;
+	{
+		Per2->setData(1);
+	}
+	system("pause");
+}
+
+
+ 
+Output:
+ 
+
