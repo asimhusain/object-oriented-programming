@@ -1,0 +1,158 @@
+Task 1
+
+●	Create a class named weight that has following data members
+▶ Kilograms 
+▶ Grams
+●	Provide getter to display data members values
+●	Provide default and Parameterized constructors for the class
+●	Provide a function to add two weight objects.
+NOTE: Make sure any value above 1000 grams add 1 to kilograms and display remaining grams as final output.
+
+Task 2: Create a Class named Class_Average that has marks of three subjects as data members. Create a constructor and destructor for the class. Provide a function that adds the marks for 5 Class_Average objects for all three subjects and display the average of each subject using that function.
+Task 1
+Header file
+class weight
+{
+	int kilogram;
+	int gram;
+public:
+	void getdata();
+	void putdata();
+	void add_weight(weight, weight);
+	weight();
+	weight(int x, float y);
+}; 
+
+Source file
+#include<iostream>
+using namespace std;
+#include"weight.h"
+weight::weight(int x, float y)
+{
+	kilogram = x;
+	gram = y;
+}
+ weight::weight()
+{
+	kilogram = 0;
+	gram = 0;
+}
+void weight::getdata()
+{
+    cout << "Enter Kilograms:";
+	cin >> kilogram;
+    cout << "Grams:";
+	cin >> gram;
+}
+
+void weight::putdata()
+{
+cout <<"You added "<< kilogram << " Kgs and" << gram << " grams.\n";
+}
+
+void weight::add_weight(weight wl, weight w2)
+{
+   gram = wl.gram + w2.gram;
+   kilogram = gram / 1000;
+   gram = gram % 1000;
+   kilogram += wl.kilogram + w2.kilogram;
+}
+
+Main file
+#include<iostream>
+using namespace std;
+#include"weight.h"
+int main()
+{
+	weight wl, w2, w3;
+	cout << "-------ADDITION OF WEIGHTS-------" << endl;
+	cout << "Enter first weight to be added" << endl;
+	wl.getdata();
+	cout << "Enter second weight to be added" << endl;
+	w2.getdata();
+	w3.add_weight(wl, w2);
+	cout << "-------First weight Added is-------" << endl;
+	wl.putdata();
+	cout << "-------Second weight added is-------" << endl;
+	w2.putdata();
+	cout << "-------Total Weight-------" << endl;
+	w3.putdata();
+	system("pause");
+	return 0;
+}
+
+
+
+Task 2
+Header file
+class Average {
+	int sub1;
+	int sub2;
+	int sub3;
+	float sub1avg;
+	float sub2avg;
+	float sub3avg;
+public:
+	Average();
+	Average(int a, int b, int c);//parametrized constructor
+	void add_avg(Average a1, Average a2, Average a3, Average a4, Average a5);
+	void display();
+	~Average();//destructor
+};
+
+Source file
+#include<iostream>
+using namespace std;
+#include"average.h"
+Average::Average()
+{
+	sub1 = 0;
+	sub2 = 0;
+	sub3 = 0;
+}
+Average::Average(int a, int b, int c) {
+	sub1 = a;
+	sub2 = b;
+	sub3 = c;
+}
+void Average::add_avg(Average a1, Average a2, Average a3, Average a4, Average a5) {
+	sub1avg = ((a1.sub1 + a2.sub1 + a3.sub1 + a4.sub1 + a5.sub1) / 5);
+	sub2avg = ((a1.sub2 + a2.sub2 + a3.sub2 + a4.sub2 + a5.sub2) / 5);
+	sub3avg = ((a1.sub3 + a2.sub3 + a3.sub3 + a4.sub3 + a5.sub3) / 5);
+}
+void Average::display() {
+	cout << "The average in sub1 is: " << sub1avg << endl;
+	cout << "The average in sub2 is: " << sub2avg << endl;
+	cout << "The average in sub3 is: " << sub3avg << endl;
+}
+Average::~Average() {}
+Main file
+#include<iostream>
+using namespace std;
+#include"average.h"
+int main() {
+	cout << "-----------Welcome-----------" << endl;
+	cout << "------------------------------------------------" << endl;
+	cout << "| Student            SUB1        SUB2      SUB3|" << endl;
+	cout << "|   1                 56          99       48  |" << endl;
+	cout << "|   2                 78          89       46  |" << endl;
+	cout << "|   3                 80          80       45  |" << endl;
+	cout << "|   4                 34          34       66  |" << endl;
+	cout << "|   5                 12          56       100 |" << endl;
+	cout << "------------------------------------------------" << endl;
+	cout << "\nFollowing marks are out of 100" << endl;
+	cout << endl;
+	Average a1(56, 99, 48);
+	Average a2(78, 89, 46);
+	Average a3(80, 80, 45);
+	Average a4(34, 34, 66);
+	Average a5(12, 56, 100);
+	Average a6;
+	a6.add_avg(a1, a2, a3, a4, a5);
+	a6.display();
+	system("pause");
+	return 0;
+}
+
+
+
